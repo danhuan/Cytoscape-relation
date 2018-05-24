@@ -1,0 +1,23 @@
+{
+  "data":{
+    "elements": {
+      "nodes": [
+        {"data": {"id": "0", "name": "习大大", "type": "t","img":"https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=db24276840fbfbedc8543e2d19999c53/8718367adab44aedaff808b3b81c8701a18bfb37.jpg"}},
+        {"data": {"id": "1", "name": "胡锦涛", "type": "t","img":"https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=db24276840fbfbedc8543e2d19999c53/8718367adab44aedaff808b3b81c8701a18bfb37.jpg"}},
+        {"data": {"id": "2", "name": "王二\n处长处长处长", "type": "n"}},
+        {"data": {"id": "3", "name": "王三\n处长处长处长", "type": "n"}},
+        {"data": {"id": "4", "name": "王四\n处长处长处长", "type": "n"}},
+        {"data": {"id": "5", "name": "王五\n处长处长处长", "type": "n"}}
+      ],
+      "edges": [
+        {"data": {"rel": "同事、同乡", "source": "0", "target": "2"}},
+        {"data": {"rel": "同事", "source": "2", "target": "1"}},
+        {"data": {"rel": "同乡", "source": "0", "target": "3"}},
+        {"data": {"rel": "同乡", "source": "3", "target": "1"}},
+        {"data": {"rel": "同校", "source": "0", "target": "4"}},
+        {"data": {"rel": "同校", "source": "4", "target": "5"}},
+        {"data": {"rel": "同校", "source": "5", "target": "1"}}
+      ]
+    }
+  }
+}

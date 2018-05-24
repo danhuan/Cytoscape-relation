@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人关系图谱</title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main" style="width: 100%;height:100%;"></div>
+
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.showLoading();
+    $.get('data/one.json', function (data) {
+    // $.get('http://192.168.10.181:5000/official/graph/?id=00261000000000308000', function (data) {
+        var data = data.data;
+        /*处理数据，加入样式*/
+        function addStyle(data) {
+            var colorArr = ["#FF9853","#00ACDD","#00CCA2"]
+            //一级
+            data.symbolSize = 50;
+            data.symbol = "image://"+data.symbol;
+
+            // data.symbol = "image://"+data.symbol;
+            //二级
+            data.children.forEach(function (s,i) {
+                s.symbol="emptyCircle";
+                s.symbolSize = 20;
+                s.itemStyle = {
+                    borderColor:colorArr[i],
+                    borderWidth:4
+                }
+                //三级
+                s.children.forEach(function (t) {
+                    t.symbol="circle";
+                    t.symbolSize = 6;
+                    t.itemStyle = {
+                        borderColor:colorArr[i],
+                        borderWidth:6
+                    };
+                    // t.lineStyle ={
+                    //     color: colorArr[i]
+                    // }
+                });
+            });
+        }
+
+        //数据加入样式
+        addStyle(data);
+
+        myChart.hideLoading();
+
+        myChart.setOption(option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+
+            series: [
+                {
+                    type: 'tree',
+                    data: [data],
+                    top: '18%',
+                    bottom: '14%',
+                    layout: 'radial',
+                    symbol: 'emptyCircle',
+                    symbolSize: 7,
+                    initialTreeDepth: 3,
+                    animationDurationUpdate: 750,
+                    // itemStyle:{
+                    //     shadowColor: "rgba(255, 255, 255, 0.5)",
+                    //     shadowBlur: 10,
+                    //     borderColor:"red"
+                    // },
+                    lineStyle:{
+                        // color:"#FF9853",
+                        curveness:0.2
+                    },
+                    label:{
+                        formatter: function (params) {
+                            // console.log(params);
+                            if(params.data.job){
+                                return params.data.name +'\n'+ params.data.job;
+                            }
+                            if(!params.data.job){
+                                return params.data.name;
+                            }
+
+                        }
+                    }
+                }
+            ]
+        });
+    });
+</script>
+</body>
+</html>
